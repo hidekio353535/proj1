@@ -1,5 +1,7 @@
 <?php
 
+sleep(5);
+
 $url = "https://digitaling.sakura.ne.jp/proj1_prod/pull2.php";
 
 //cURLセッションを初期化する
