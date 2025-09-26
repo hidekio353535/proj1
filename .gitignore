@@ -1,0 +1,49 @@
+
+*.sh
+.vscode
+
+.history/**
+.DS_Store
+
+
+#DB setting
+#share/php/db.php
+#global.php
+#db_connect.php
+
+#uploads folder
+/uploads/*
+*.xls
+*.xlsx
+*.pdf
+
+# copy file
+*\ -\ Copy*
+
+### Dreamweaver ###
+# DW Dreamweaver added files
+_notes
+_compareTemp
+configs/
+dwsync.xml
+dw_php_codehinting.config
+*.mno
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+##### Dropbox
+# Dropbox settings and caches
+.dropbox
+.dropbox.attr
+.dropbox.cache
+
