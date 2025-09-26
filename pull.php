@@ -12,9 +12,6 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 //URLの情報を取得する
 $res =  curl_exec($ch);
 
-//結果を表示する
-var_dump($res);
-
 //セッションを終了する
 curl_close($conn);
 
