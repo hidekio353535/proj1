@@ -1,6 +1,6 @@
 <?php
 
-$url = "https://www.sejuku.net/blog/";
+$url = "https://digitaling.sakura.ne.jp/proj1_prod/pull2.php";
 
 //cURLセッションを初期化する
 $ch = curl_init();
