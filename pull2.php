@@ -1,7 +1,7 @@
 <?php
 
 // GitHub Actionsのシークレットに登録したキーを環境変数から取得
-$secret = getenv('WEBHOOK_SECRET');
+$secret = "SampleSecret";//getenv('WEBHOOK_SECRET');
 
 // リクエストヘッダーから署名を取得
 $signature = $_SERVER['HTTP_X_HUB_SIGNATURE_256'] ?? null;
