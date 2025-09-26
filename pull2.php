@@ -4,7 +4,7 @@
 $secret = "SampleSecret";//getenv('WEBHOOK_SECRET');
 
 // リクエストヘッダーから署名を取得
-$signature = $_SERVER['HTTP_X_HUB_SIGNATURE_256'] ?? null;
+$signature = $_SERVER['HTTP_X_HUB_SIGNATURE_256'] ? null;
 if (!$signature) {
     http_response_code(403);
     die('Signature header missing.');
