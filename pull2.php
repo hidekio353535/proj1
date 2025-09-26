@@ -1,39 +1,34 @@
 <?php
 
-// GitHub Actionsのシークレットに登録したキーを環境変数から取得
-$secret = "SampleSecret";//getenv('WEBHOOK_SECRET');
+define( 'LOGFILE', '/DIR' );
+define( 'SECRET', '0000000000' );
+define( 'PULL_CMD', 'git pull origin main' );
 
-// リクエストヘッダーから署名を取得
-$signature = $_SERVER['HTTP_X_HUB_SIGNATURE_256'] ? null;
-if (!$signature) {
-    http_response_code(403);
-    die('Signature header missing.');
+$post_data = file_get_contents( 'php://input' );
+$signature = hash_hmac( 'sha1', $post_data, SECRET );
+
+function log_msg( $message ) {
+	file_put_contents( LOGFILE, $message . "\n", FILE_APPEND );
 }
 
-// リクエストボディを取得
-$payload = file_get_contents('php://input');
-
-// 署名を検証
-list($algorithm, $hash) = explode('=', $signature, 2);
-$payload_hash = hash_hmac($algorithm, $payload, $secret);
-
-if (!hash_equals($hash, $payload_hash)) {
-    http_response_code(403);
-    die('Invalid signature.');
+if ( empty( $_SERVER['HTTP_X_HUB_SIGNATURE'] ) ) {
+	exit;
 }
 
-// 検証が成功した場合の処理（例：デプロイコマンドの実行）
-// ウェブフックのペイロードをデコード
-$payload_data = json_decode($payload, true);
-
-// 例: mainブランチへのプッシュ時にデプロイ
-if (isset($payload_data['ref']) && $payload_data['ref'] === 'refs/heads/main') {
-    exec('git pull');
-    // その他のデプロイ処理
-    echo 'Deployment successful.';
+if ( ! hash_equals( 'sha1=' . $signature, $_SERVER['HTTP_X_HUB_SIGNATURE'] ) ) {
+	exit;
 }
-exec("git pull origin main");
 
-echo 'Webhook processed successfully.';
+// At this point, we've verified the signature from Github, so we can do things.
+$date = date(' m/d/Y h:i:s a', time() );
+log_msg( "Deploying at {$date}" );
 
-?>
+$output_lines = array();
+exec( PULL_CMD, $output_lines );
+
+if ( ! empty( $output_lines ) ) {
+	log_msg( implode( "\n", $output_lines ) );
+}
+
+exit;
+
