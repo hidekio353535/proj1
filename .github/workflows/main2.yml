@@ -16,4 +16,4 @@ jobs:
         config: ${{ secrets.CONFIG }} # ssh target だけで接続できるように設定
         name: id_rsa
     - name: Git pull
-      run: ssh digitaling 'git -C /home/digitaling/www/proj1_prod pull origin main'
+      run: ssh digitaling@digitaling.sakura.ne.jp 'git -C /home/digitaling/www/proj1_prod pull origin main'
