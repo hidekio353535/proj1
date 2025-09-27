@@ -1,15 +1,20 @@
-name: Remote SSH Command
-on: [push]
+name: Deploy to Server
+on:
+  push:
+    branches: [ main ]
+
 jobs:
-  build:
-    name: Build
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Execute remote SSH commands using password
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          script: whoami
+    - name: Execute deployment script
+      uses: ./
+      with:
+        host: 'digitaling.sakura.ne.jp'
+        username: 'digitaling'
+        password: ${{ secrets.PASSWORD }}
+        script: |
+          whoami
+          #cd /var/www/html
+          #git pull origin main
+          
