@@ -15,4 +15,4 @@ jobs:
         public-key: ${{ secrets.SSH_KEY_PUBLIC }}
         known-hosts: ${{ secrets.KNOWN_HOSTS }}
     - name: Git pull
-      run: ssh digitaling@digitaling.sakura.ne.jp
+      run: ssh -t -t digitaling@digitaling.sakura.ne.jp
