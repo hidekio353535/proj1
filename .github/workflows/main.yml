@@ -13,6 +13,6 @@ jobs:
       with:
         private-key: ${{ secrets.SSH_KEY }}
         public-key: ${{ secrets.SSH_KEY_PUBLIC }}
-      #  known-hosts: ${{ secrets.KNOWN_HOSTS }}
+        known-hosts: ${{ secrets.KNOWN_HOSTS }}
     - name: Git pull
       run: ssh -t -t digitaling@digitaling.sakura.ne.jp 'cd /home/digitaling/www/proj1_prod;git pull origin main'
